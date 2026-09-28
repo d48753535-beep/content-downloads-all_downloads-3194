@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adham Elsharkawe — Personal</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#050505;--text:#f7f7f7;--muted:#929292;--line:#222;--glass:rgba(255,255,255,.055)}
+html{scroll-behavior:smooth}
+body{
+  font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text);
+  overflow-x:hidden;line-height:1.6;
+}
+body:before{
+  content:"";position:fixed;width:600px;height:600px;border-radius:50%;
+  background:rgba(255,255,255,.045);filter:blur(100px);
+  top:-250px;right:-180px;pointer-events:none;
+  animation:orb 9s ease-in-out infinite alternate;
+}
+body:after{
+  content:"";position:fixed;width:450px;height:450px;border-radius:50%;
+  background:rgba(120,120,120,.035);filter:blur(110px);
+  bottom:-250px;left:-180px;pointer-events:none;
+  animation:orb2 12s ease-in-out infinite alternate;
+}
+.container{width:min(1120px,90%);margin:auto;position:relative;z-index:2}
+nav{height:88px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:20px;font-weight:900;letter-spacing:-1px}
+.logo span{color:#777}
+.navbtn{color:#fff;text-decoration:none;font-size:12px;font-weight:700;letter-spacing:2px;
+border:1px solid #333;padding:11px 17px;border-radius:999px;transition:.35s}
+.navbtn:hover{background:#fff;color:#000;transform:translateY(-2px)}
+
+.hero{min-height:calc(100vh - 88px);display:flex;align-items:center;position:relative;padding:30px 0 100px}
+.hero:before{
+content:"";position:absolute;inset:5% -20% auto;height:1px;
+background:linear-gradient(90deg,transparent,#333,transparent);opacity:.7;
+}
+.kicker{font-size:11px;letter-spacing:5px;color:#777;text-transform:uppercase;
+opacity:0;animation:up .9s .1s forwards}
+h1{
+font-size:clamp(60px,12vw,150px);line-height:.82;letter-spacing:-8px;
+font-weight:900;margin-top:20px;max-width:1050px;
+opacity:0;animation:heroIn 1.2s .25s cubic-bezier(.2,.8,.2,1) forwards;
+}
+h1 .gray{
+background:linear-gradient(90deg,#fff,#777);-webkit-background-clip:text;
+background-clip:text;color:transparent;
+}
+.subtitle{max-width:650px;color:#999;font-size:18px;margin-top:30px;
+opacity:0;animation:up .9s .65s forwards}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px;
+opacity:0;animation:up .9s .8s forwards}
+.btn{
+position:relative;overflow:hidden;text-decoration:none;color:#fff;border:1px solid #333;
+padding:14px 21px;border-radius:999px;font-size:13px;font-weight:700;
+transition:transform .3s,border-color .3s,background .3s;
+}
+.btn:before{content:"";position:absolute;inset:0;background:#fff;transform:translateY(110%);
+transition:transform .35s;z-index:-1}
+.btn:hover{color:#000;border-color:#fff;transform:translateY(-4px);box-shadow:0 12px 30px rgba(255,255,255,.08)}
+.btn:hover:before{transform:translateY(0)}
+.scroll{
+position:absolute;bottom:25px;left:0;color:#555;font-size:10px;letter-spacing:3px;
+animation:float 2s ease-in-out infinite;
+}
+.scroll:after{content:"";display:inline-block;width:45px;height:1px;background:#444;
+vertical-align:middle;margin-left:12px}
+
+.section{padding:110px 0;border-top:1px solid #181818}
+.reveal{opacity:0;transform:translateY(35px);transition:opacity .9s,transform .9s}
+.reveal.show{opacity:1;transform:none}
+.section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:35px}
+.eyebrow{font-size:10px;letter-spacing:4px;color:#666;text-transform:uppercase}
+.section h2{font-size:clamp(38px,6vw,72px);letter-spacing:-4px;line-height:.95}
+.about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+.card{
+border:1px solid #222;background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.018));
+border-radius:26px;padding:35px;position:relative;overflow:hidden;
+transition:transform .4s,border-color .4s;
+}
+.card:before{content:"";position:absolute;width:180px;height:180px;border-radius:50%;
+background:#fff;filter:blur(100px);opacity:.04;right:-70px;top:-70px}
+.card:hover{transform:translateY(-8px);border-color:#444}
+.card h3{font-size:27px;margin:10px 0 12px}
+.card p{color:#999;font-size:15px}
+.skills{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.skill{padding:10px 15px;border:1px solid #333;border-radius:999px;color:#ddd;font-size:12px;
+transition:.3s}
+.skill:hover{background:#fff;color:#000;transform:scale(1.04)}
+
+.contact-box{
+border:1px solid #252525;border-radius:30px;padding:55px;
+background:radial-gradient(circle at 85% 20%,rgba(255,255,255,.08),transparent 35%),#0a0a0a;
+position:relative;overflow:hidden;
+}
+.contact-box h2{font-size:clamp(45px,7vw,90px);letter-spacing:-5px;line-height:.9}
+.contact-box p{color:#888;margin-top:18px}
+footer{padding:30px 0 45px;color:#555;font-size:11px;letter-spacing:1px}
+@keyframes up{to{opacity:1;transform:translateY(0)}}
+@keyframes heroIn{from{opacity:0;transform:translateY(45px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes orb{to{transform:translate(-90px,80px) scale(1.15)}}
+@keyframes orb2{to{transform:translate(90px,-70px) scale(1.1)}}
+@keyframes float{50%{transform:translateY(-7px)}}
+@media(max-width:700px){
+nav{height:72px}.hero{min-height:calc(100vh - 72px);padding-top:20px}
+h1{letter-spacing:-4px}.subtitle{font-size:16px}
+.about-grid{grid-template-columns:1fr}.section{padding:80px 0}
+.section-head{display:block}.section-head .eyebrow{margin-bottom:15px}
+.card,.contact-box{padding:27px}.contact-box h2{letter-spacing:-3px}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<nav>
+  <div class="logo">ADHAM<span>.</span></div>
+  <a class="navbtn" href="#contact">CONTACT</a>
+</nav>
+
+<section class="hero">
+  <div>
+    <div class="kicker">Personal Website / 2026</div>
+    <h1>ADHAM<br><span class="gray">ELSHARKAWE</span></h1>
+    <p class="subtitle">Computer Science student focused on Media Buying, Freelancing and building digital skills.</p>
+    <div class="actions">
+      <a class="btn" href="https://wa.me/201278173782" target="_blank">WHATSAPP ↗</a>
+      <a class="btn" href="https://www.instagram.com/adham_elshrkawe" target="_blank">INSTAGRAM ↗</a>
+      <a class="btn" href="https://www.tiktok.com/@adham_elsharkawe" target="_blank">TIKTOK ↗</a>
+    </div>
+  </div>
+  <div class="scroll">SCROLL</div>
+</section>
+
+<section class="section">
+  <div class="section-head reveal">
+    <div class="eyebrow">01 / About</div>
+    <h2>WHO I AM</h2>
+  </div>
+  <div class="about-grid">
+    <div class="card reveal">
+      <div class="eyebrow">Education</div>
+      <h3>Computer Science</h3>
+      <p>I study Computer Science and continuously develop my technical and digital skills.</p>
+    </div>
+    <div class="card reveal">
+      <div class="eyebrow">Focus</div>
+      <h3>Digital Growth</h3>
+      <p>My current focus is Media Buying and Freelancing, with an interest in creating useful digital opportunities.</p>
+      <div class="skills">
+        <div class="skill">MEDIA BUYING</div>
+        <div class="skill">FREELANCING</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="contact-box reveal">
+    <div class="eyebrow">02 / Contact</div>
+    <h2>LET'S<br>CONNECT.</h2>
+    <p>For business, freelance or media buying inquiries.</p>
+    <div class="actions">
+      <a class="btn" href="https://wa.me/201278173782" target="_blank">+20 12 78173782 ↗</a>
+      <a class="btn" href="https://www.instagram.com/adham_elshrkawe" target="_blank">INSTAGRAM ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 ADHAM ELSHARKAWE — ALL RIGHTS RESERVED.</footer>
+</div>
+
+<script>
+const items=document.querySelectorAll('.reveal');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')});
+}},{{threshold:.12}});
+items.forEach(i=>observer.observe(i));
+
+document.addEventListener('mousemove',e=>{
+  const x=(e.clientX/window.innerWidth-.5)*10;
+  const y=(e.clientY/window.innerHeight-.5)*10;
+  document.body.style.setProperty('--mx',x+'px');
+  document.body.style.setProperty('--my',y+'px');
+});
+</script>
+</body>
+</html>
